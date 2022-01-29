@@ -8,4 +8,5 @@ class OpenGLContext
 public:
     static bool init();
     static void clear();
+    static void setOpenGLVersionOnce();
 };

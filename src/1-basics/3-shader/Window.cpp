@@ -37,8 +37,10 @@ void Window::initialize()
     if (windowCount == 0)
     {
         bool success = glfwInit();
-        if (success)
+        if (!success)
             spdlog::error("Could not initialize GLFW!");
+        else
+            OpenGLContext::setOpenGLVersionOnce();
     }
 
     this->window = glfwCreateWindow(
@@ -48,7 +50,7 @@ void Window::initialize()
         NULL,
         NULL);
 
-    if (!window)
+    if (!this->window)
         spdlog::error("Could not initialize window!");
     else
         ++windowCount;
