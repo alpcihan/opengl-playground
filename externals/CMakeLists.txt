@@ -2,6 +2,7 @@ add_library(externals)
 
 add_subdirectory(glfw)
 add_subdirectory(glm)
+add_subdirectory(spdlog)
 
 target_include_directories(
     externals 
