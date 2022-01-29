@@ -21,7 +21,6 @@ class Window
 {
 public:
     WindowProps windowProps;
-    GLFWwindow *window;
 
 public:
     Window(const WindowProps &windowProps = WindowProps());
@@ -32,6 +31,9 @@ public:
 
     bool isClosed();
 
+private:
+    GLFWwindow *window;
+    
 private:
     void initialize();
     void shutdown();
