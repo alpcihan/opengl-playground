@@ -5,6 +5,7 @@ set(CHAPTERS
 set(
     1-basics
     1-hello-window
+    2-hello-triangle
 )
 
 foreach(CHAPTER ${CHAPTERS})
