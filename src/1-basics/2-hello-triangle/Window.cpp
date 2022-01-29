@@ -37,7 +37,7 @@ void Window::initialize()
     if (windowCount == 0)
     {
         bool success = glfwInit();
-        if (success)
+        if (!success)
             spdlog::error("Could not initialize GLFW!");
     }
 
