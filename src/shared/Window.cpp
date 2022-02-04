@@ -14,20 +14,20 @@ Window::~Window()
     this->shutdown();
 }
 
-void Window::update()
+void Window::update() const
 {
     glfwMakeContextCurrent(this->window);
     glfwSwapBuffers(this->window);
     glfwPollEvents();
 }
 
-void Window::clear()
+void Window::clear() const
 {
     glfwMakeContextCurrent(this->window);
     OpenGLContext::clear();
 }
 
-bool Window::isClosed()
+bool Window::isClosed() const
 {
     return glfwWindowShouldClose(this->window);
 }
@@ -39,6 +39,8 @@ void Window::initialize()
         bool success = glfwInit();
         if (!success)
             spdlog::error("Could not initialize GLFW!");
+        else
+            OpenGLContext::setOpenGLVersionOnce();
     }
 
     this->window = glfwCreateWindow(
@@ -48,7 +50,7 @@ void Window::initialize()
         NULL,
         NULL);
 
-    if (!window)
+    if (!this->window)
         spdlog::error("Could not initialize window!");
     else
         ++windowCount;
@@ -58,7 +60,7 @@ void Window::initialize()
     OpenGLContext::init();
 }
 
-void Window::shutdown()
+void Window::shutdown() const
 {
     glfwDestroyWindow(this->window);
     --windowCount;

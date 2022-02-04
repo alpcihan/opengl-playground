@@ -20,21 +20,19 @@ struct WindowProps
 class Window
 {
 public:
-    WindowProps windowProps;
-
-public:
     Window(const WindowProps &windowProps = WindowProps());
     ~Window();
 
-    void update();
-    void clear();
+    void update() const;
+    void clear() const;
 
-    bool isClosed();
+    bool isClosed() const;
 
 private:
     GLFWwindow *window;
+    WindowProps windowProps;
     
 private:
     void initialize();
-    void shutdown();
+    void shutdown() const;
 };

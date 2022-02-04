@@ -1,5 +1,5 @@
 #include "OpenGLContext.h"
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 
 bool OpenGLContext::init()
 {
