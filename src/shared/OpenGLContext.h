@@ -6,7 +6,7 @@
 class OpenGLContext
 {
 public:
-    static bool init();
+    static bool loadGlad();
     static void clear();
     static void setOpenGLVersionOnce();
 };

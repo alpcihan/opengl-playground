@@ -34,5 +34,8 @@ private:
     
 private:
     void initialize();
+    void initializeGLFW() const;
+    void createWindow();
+
     void shutdown() const;
 };

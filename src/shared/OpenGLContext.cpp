@@ -1,7 +1,7 @@
 #include "OpenGLContext.h"
 #include <spdlog/spdlog.h>
 
-bool OpenGLContext::init()
+bool OpenGLContext::loadGlad()
 {
     bool success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     if (!success)
@@ -19,7 +19,8 @@ void OpenGLContext::setOpenGLVersionOnce()
 {
     static bool isVersionSet = false;
 
-    if(isVersionSet) {
+    if (isVersionSet)
+    {
         return;
     }
 

@@ -34,15 +34,28 @@ bool Window::isClosed() const
 
 void Window::initialize()
 {
-    if (windowCount == 0)
-    {
-        bool success = glfwInit();
-        if (!success)
-            spdlog::error("Could not initialize GLFW!");
-        else
-            OpenGLContext::setOpenGLVersionOnce();
-    }
+    bool isFirstWindow = windowCount == 0;
 
+    if (isFirstWindow)
+        this->initializeGLFW();
+
+    this->createWindow();
+
+    if (isFirstWindow)
+        OpenGLContext::loadGlad();
+}
+
+void Window::initializeGLFW() const
+{
+    bool success = glfwInit();
+    if (!success)
+        spdlog::error("Could not initialize GLFW!");
+    else
+        OpenGLContext::setOpenGLVersionOnce();
+}
+
+void Window::createWindow()
+{
     this->window = glfwCreateWindow(
         this->windowProps.width,
         this->windowProps.height,
@@ -56,8 +69,6 @@ void Window::initialize()
         ++windowCount;
 
     glfwMakeContextCurrent(this->window);
-
-    OpenGLContext::init();
 }
 
 void Window::shutdown() const
