@@ -9,6 +9,11 @@ Shader::Shader(const std::string &vertexSrcFilePath, const std::string &fragment
     this->init(vertexSrcFilePath, fragmentSrcFilePath);
 }
 
+Shader::~Shader()
+{
+    glDeleteProgram(this->programId);
+}
+
 void Shader::bind() const
 {
     glUseProgram(this->programId);
@@ -16,19 +21,19 @@ void Shader::bind() const
 
 void Shader::setBool(const std::string &name, bool value) const
 {
-    const int uniformLocation = glGetUniformLocation(this -> programId, name.c_str());
+    const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
     glUniform1i(uniformLocation, (int)value);
 }
 
 void Shader::setInt(const std::string &name, int value) const
 {
-    const int uniformLocation = glGetUniformLocation(this -> programId, name.c_str());
+    const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
     glUniform1i(uniformLocation, value);
 }
 
 void Shader::setFloat(const std::string &name, float value) const
 {
-    const int uniformLocation = glGetUniformLocation(this -> programId, name.c_str());
+    const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
     glUniform1f(uniformLocation, value);
 }
 
