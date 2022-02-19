@@ -1,4 +1,4 @@
-#include "ShaderType.h"
+#include "shader/ShaderType.h"
 
 const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap({
     {ShaderDataType::Int, 4},

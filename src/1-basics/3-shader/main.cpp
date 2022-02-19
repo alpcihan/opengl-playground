@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Window.h"
+#include "window/Window.h"
 #include "spdlog/spdlog.h"
 
 void linkProgram(const unsigned int program, const unsigned int vertexShader, const unsigned int fragmentShader)

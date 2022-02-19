@@ -1,4 +1,4 @@
-#include "VBO.h"
+#include "buffer/VBO.h"
 #include <glad/glad.h>
 
 VBO::VBO(unsigned int size)

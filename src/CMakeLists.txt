@@ -16,15 +16,15 @@ foreach(CHAPTER ${CHAPTERS})
             "${CHAPTER}/${PROJECT}/*.hpp"
             "${CHAPTER}/${PROJECT}/*.cpp"
             "${CHAPTER}/${PROJECT}/*.c"
-            "shared/*.c"
-            "shared/*.cpp"
+            "shared/src/*.c"
+            "shared/src/*.cpp"
         )
         set(NAME "${CHAPTER}_${PROJECT}")
 
         add_executable(${NAME} ${SOURCE})
         target_include_directories(${NAME} 
             PUBLIC "${CHAPTER}/${PROJECT}"
-            PUBLIC "shared"
+            PUBLIC "shared/include"
         )
         target_link_libraries(${NAME} externals)
     endforeach(PROJECT)

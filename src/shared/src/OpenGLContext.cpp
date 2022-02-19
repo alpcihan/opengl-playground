@@ -1,4 +1,4 @@
-#include "OpenGLContext.h"
+#include "gl/OpenGLContext.h"
 #include <spdlog/spdlog.h>
 
 bool OpenGLContext::loadGlad()

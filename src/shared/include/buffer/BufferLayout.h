@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <initializer_list>
-#include "ShaderType.h"
+#include "shader/ShaderType.h"
 
 struct BufferElement
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "OpenGLContext.h"
+#include "gl/OpenGLContext.h"
 
 struct WindowProps
 {

@@ -1,5 +1,5 @@
-#include "BufferLayout.h"
-#include "ShaderType.h"
+#include "buffer/BufferLayout.h"
+#include "shader/ShaderType.h"
 
 //////////////////
 // Buffer Element

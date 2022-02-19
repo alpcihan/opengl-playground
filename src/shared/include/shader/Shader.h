@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "ShaderType.h"
+#include "shader/ShaderType.h"
 
 class Shader
 {

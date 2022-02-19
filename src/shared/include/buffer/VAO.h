@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "VBO.h"
+#include "buffer/VBO.h"
 #include "EBO.h"
 
 class VAO
@@ -23,8 +23,7 @@ private:
     std::shared_ptr<EBO> ebo;
 
 private:
-    void setAttribPointers(const std::vector<BufferElement> &bufferElements);
-    void setFloatAttrib(const BufferElement &bufferElement);
-    void setIntAttrib(const BufferElement &bufferElement);
+    void setAttribPointers(const BufferLayout &layout);
+    void setFloatAttrib(const BufferElement &bufferElement, const unsigned int stride);
+    void setIntAttrib(const BufferElement &bufferElement, const unsigned int stride);
 };
-

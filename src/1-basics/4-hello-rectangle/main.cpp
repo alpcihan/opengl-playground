@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Window.h"
-#include "Shader.h"
+#include "window/Window.h"
+#include "shader/Shader.h"
 #include <spdlog/spdlog.h>
 
 int main()

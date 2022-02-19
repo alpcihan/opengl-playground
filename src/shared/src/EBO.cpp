@@ -1,4 +1,4 @@
-#include "EBO.h"
+#include "buffer/EBO.h"
 #include <glad/glad.h>
 
 EBO::EBO(unsigned int *indices, unsigned int indexCount)
