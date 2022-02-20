@@ -4,24 +4,27 @@
 //////////////////
 // Buffer Element
 //////////////////
-BufferElement::BufferElement(ShaderDataType type, const std::string &name, bool isNormalized)
-    : type(type), name(name), size(), isNormalized(isNormalized) {}
+BufferElement::BufferElement(ShaderDataType type, bool isNormalized, const std::string &name)
+    : type(type), name(name), byte(shaderDataTypeByteMap.find(type)->second), isNormalized(isNormalized) {}
 
 /////////////////
 // Buffer Layout
 /////////////////
 BufferLayout::BufferLayout(std::initializer_list<BufferElement> elements)
-    : elements(elements) {}
+    : elements(elements)
+{
+    this->calculateOffsetsAndStride();
+}
 
 void BufferLayout::calculateOffsetsAndStride()
 {
     unsigned long offset = 0;
 
-    for (BufferElement &element : elements)
+    for (BufferElement &element : this->elements)
     {
         element.offset = offset;
-        offset += element.size;
-        this->stride += element.size;
+        offset += element.byte;
+        this->stride += element.byte;
     }
 }
 

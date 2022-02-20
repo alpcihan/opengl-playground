@@ -1,6 +1,6 @@
 #include "shader/ShaderType.h"
 
-const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap({
+const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeByteMap({
     {ShaderDataType::Int, 4},
     {ShaderDataType::IVec2, 4 * 2},
     {ShaderDataType::IVec3, 4 * 3},
@@ -14,7 +14,7 @@ const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap({
     {ShaderDataType::Bool, 1},
 });
 
-const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeCountMap({
+const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap({
     {ShaderDataType::Int, 1},
     {ShaderDataType::IVec2, 2},
     {ShaderDataType::IVec3, 3},

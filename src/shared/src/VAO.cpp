@@ -1,5 +1,6 @@
 #include "buffer/VAO.h"
 #include <glad/glad.h>
+#include <iostream>
 
 VAO::VAO()
 {
@@ -40,7 +41,7 @@ void VAO::setEBO(const std::shared_ptr<EBO> &ebo)
 
 void VAO::setAttribPointers(const BufferLayout &layout)
 {
-    const std::vector<BufferElement>& bufferElements = layout.getElements();
+    const std::vector<BufferElement> &bufferElements = layout.getElements();
 
     for (const BufferElement &bufferElement : bufferElements)
     {
@@ -69,27 +70,27 @@ void VAO::setAttribPointers(const BufferLayout &layout)
 
 void VAO::setFloatAttrib(const BufferElement &bufferElement, const unsigned int stride)
 {
-    glEnableVertexAttribArray(this -> attribPointerCount);
+    glEnableVertexAttribArray(this->attribPointerCount);
 
-    glVertexAttribPointer(attribPointerCount,
-                          bufferElement.size,
+    glVertexAttribPointer(this->attribPointerCount,
+                          shaderDataTypeSizeMap.find(bufferElement.type)->second,
                           shaderDataTypeToGLTypeMap.find(bufferElement.type)->second,
                           bufferElement.isNormalized ? GL_TRUE : GL_FALSE,
                           stride,
-                          (const void *)bufferElement.offset);
+                          (void *)bufferElement.offset);
 
-    (this -> attribPointerCount)++;
+    (this->attribPointerCount)++;
 }
 
 void VAO::setIntAttrib(const BufferElement &bufferElement, const unsigned int stride)
 {
-    glEnableVertexAttribArray(this -> attribPointerCount);
+    glEnableVertexAttribArray(this->attribPointerCount);
 
-    glVertexAttribIPointer(attribPointerCount,
-                          bufferElement.size,
-                          shaderDataTypeToGLTypeMap.find(bufferElement.type)->second,
-                          stride,
-                          (const void *)bufferElement.offset);
+    glVertexAttribIPointer(this->attribPointerCount,
+                           shaderDataTypeSizeMap.find(bufferElement.type)->second,
+                           shaderDataTypeToGLTypeMap.find(bufferElement.type)->second,
+                           stride,
+                           (void *)bufferElement.offset);
 
-    (this -> attribPointerCount)++;
+    (this->attribPointerCount)++;
 }

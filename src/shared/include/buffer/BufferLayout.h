@@ -10,13 +10,13 @@ struct BufferElement
 public:
     ShaderDataType type;
     std::string name;
-    unsigned int size;
+    unsigned int byte;
     unsigned long offset;
     bool isNormalized;
 
 public:
     BufferElement() = default;
-    BufferElement(ShaderDataType type, const std::string &name, bool isNormalized = false);
+    BufferElement(ShaderDataType type, bool isNormalized = false, const std::string &name = "");
 };
 
 struct BufferLayout

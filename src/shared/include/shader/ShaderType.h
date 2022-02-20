@@ -24,6 +24,6 @@ enum class ShaderDataType
     Bool
 };
 
+extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeByteMap;
 extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap;
-extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeCountMap;
 extern const std::unordered_map<ShaderDataType, GLenum> shaderDataTypeToGLTypeMap;

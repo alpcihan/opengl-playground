@@ -4,8 +4,9 @@
 EBO::EBO(unsigned int *indices, unsigned int indexCount)
     : indexCount(indexCount)
 {
-    glCreateBuffers(1, &this->id);
-    glBufferData(GL_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    glGenBuffers(1, &this->id);
+    this->bind();
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
 EBO::~EBO()

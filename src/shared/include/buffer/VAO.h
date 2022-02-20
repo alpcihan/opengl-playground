@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "buffer/VBO.h"
+#include "VBO.h"
 #include "EBO.h"
 
 class VAO
