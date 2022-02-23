@@ -12,20 +12,20 @@ set(1-basics
 
 foreach(CHAPTER ${CHAPTERS})
     foreach(PROJECT ${${CHAPTER}})
-        file(GLOB SOURCE
+        file(GLOB_RECURSE SOURCE
             "${CHAPTER}/${PROJECT}/*.h"
             "${CHAPTER}/${PROJECT}/*.hpp"
             "${CHAPTER}/${PROJECT}/*.cpp"
             "${CHAPTER}/${PROJECT}/*.c"
-            "shared/src/*.c"
-            "shared/src/*.cpp"
+            "shared/*.c"
+            "shared/*.cpp"
         )
         set(NAME "${CHAPTER}_${PROJECT}")
 
         add_executable(${NAME} ${SOURCE})
         target_include_directories(${NAME} 
             PUBLIC "${CHAPTER}/${PROJECT}"
-            PUBLIC "shared/include"
+            PUBLIC "shared"
         )
         target_link_libraries(${NAME} externals)
     endforeach(PROJECT)
