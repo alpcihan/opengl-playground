@@ -6,9 +6,9 @@ uniform float uTime;
 
 out vec3 vertexColor;
 
-    void main()
-    {
-        float offset = 0.5*sin(uTime);
-        gl_Position = vec4(offset+aPos, 1.0);
-        vertexColor = aColor;
-    }
+void main()
+{
+    float offset = 0.5*sin(uTime);
+    gl_Position = vec4(offset+aPos, 1.0);
+    vertexColor = aColor;
+}
