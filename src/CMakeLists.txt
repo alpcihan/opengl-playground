@@ -8,6 +8,7 @@ set(1-basics
     3-shader
     4-hello-rectangle
     5-textures
+    6-transformations
 )
 
 foreach(CHAPTER ${CHAPTERS})

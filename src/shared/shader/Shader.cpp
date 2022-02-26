@@ -1,6 +1,7 @@
 #include "shader/Shader.h"
 #include <fstream>
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <spdlog/spdlog.h>
 #include "RootDir.h"
 
@@ -35,6 +36,18 @@ void Shader::setFloat(const std::string &name, float value) const
 {
     const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
     glUniform1f(uniformLocation, value);
+}
+
+void Shader::setMat3(const std::string &name, glm::mat4 &matrix) const
+{
+    const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
+    glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void Shader::setMat4(const std::string &name, glm::mat4 &matrix) const
+{
+    const int uniformLocation = glGetUniformLocation(this->programId, name.c_str());
+    glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void Shader::init(const std::string &vertexSrcFilePath, const std::string &fragmentSrcFilePath)
