@@ -35,9 +35,14 @@ int main()
     Shader shader("resources/shaders/hello-texture.vert", "resources/shaders/hello-texture.frag");
     shader.bind();
 
-    Texture texture("resources/textures/wall.jpg");
-    texture.bind();
-    shader.setInt("u_texture", 0);
+    Texture texture0("resources/textures/wall.jpg");
+    Texture texture1("resources/textures/pepe.png");
+
+    texture0.bind(0);
+    shader.setInt("u_texture0", 0);
+
+    texture1.bind(1);
+    shader.setInt("u_texture1", 1);
 
     while (!window.isClosed())
     {
