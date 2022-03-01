@@ -9,6 +9,7 @@ set(1-basics
     4-hello-rectangle
     5-textures
     6-transformations
+    7-camera
 )
 
 foreach(CHAPTER ${CHAPTERS})
