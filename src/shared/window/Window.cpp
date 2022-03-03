@@ -1,5 +1,6 @@
 #include "window/Window.h"
 #include "spdlog/spdlog.h"
+#include "opengl/OpenGLAPI.h"
 
 static unsigned windowCount = 0;
 
@@ -16,15 +17,13 @@ Window::~Window()
 
 void Window::update() const
 {
-    glfwMakeContextCurrent(this->window);
-    glfwSwapBuffers(this->window);
+    this->openGLContext->swapBuffers();
     glfwPollEvents();
 }
 
 void Window::clear() const
 {
-    glfwMakeContextCurrent(this->window);
-    OpenGLContext::clear();
+    OpenGLAPI::clear();
 }
 
 bool Window::isClosed() const
@@ -34,24 +33,31 @@ bool Window::isClosed() const
 
 void Window::initialize()
 {
-    bool isFirstWindow = windowCount == 0;
+    static bool isFirstWindow = true;
 
     if (isFirstWindow)
+    {
         this->initializeGLFW();
+        isFirstWindow = false;
+    }
 
     this->createWindow();
-
-    if (isFirstWindow)
-        OpenGLContext::loadGlad();
+    openGLContext = std::make_unique<OpenGLContext>(window);
+    openGLContext->init();
 }
 
 void Window::initializeGLFW() const
 {
     bool success = glfwInit();
-    if (!success)
+    if (!success){
         spdlog::error("Could not initialize GLFW!");
-    else
-        OpenGLContext::setOpenGLVersionOnce();
+        return;
+    }
+    
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
 void Window::createWindow()

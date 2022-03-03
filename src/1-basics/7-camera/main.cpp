@@ -3,6 +3,7 @@
 #include "texture/Texture.h"
 #include "buffer/VAO.h"
 #include "components/TransformComponent.h"
+#include "opengl/OpenGLAPI.h"
 
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -10,8 +11,8 @@
 int main()
 {
     Window window = Window(WindowProps(1600, 1600));
-    glEnable(GL_DEPTH_TEST);
-
+    OpenGLAPI::init();
+    
     const float vertices[] = {
         // front
         0.5, 0.5, 0.5, 1.0, 1.0,
@@ -89,7 +90,7 @@ int main()
         20,
     };
 
-    VAO vao;
+    std::shared_ptr<VAO> vao = std::make_shared<VAO>();
 
     std::shared_ptr<VBO> vbo = std::make_shared<VBO>(vertices, sizeof(float) * 120);
     vbo->setLayout({{ShaderDataType::Vec3, true},
@@ -97,8 +98,8 @@ int main()
 
     std::shared_ptr<EBO> ebo = std::make_shared<EBO>(indices, sizeof(unsigned int) * 36);
 
-    vao.addVBO(vbo);
-    vao.setEBO(ebo);
+    vao->addVBO(vbo);
+    vao->setEBO(ebo);
 
     Shader shader("resources/shaders/hello-transformations.vert", "resources/shaders/hello-texture.frag");
     shader.bind();
@@ -126,7 +127,7 @@ int main()
 
     while (!window.isClosed())
     {
-        window.clear();
+        OpenGLAPI::clear();
 
         /* Render comes here. */
         transform.rotation = glm::vec3(glm::radians((float)glfwGetTime() * 10));
@@ -135,7 +136,7 @@ int main()
         glm::mat4 mvp = projection * view * model;
         shader.setMat4("u_mtrx", mvp);
 
-        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        OpenGLAPI::draw(vao);
 
         window.update();
     }

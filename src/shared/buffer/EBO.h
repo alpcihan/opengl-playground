@@ -13,5 +13,5 @@ public:
 
 private:
     unsigned int id;
-    unsigned int indexCount;
+    unsigned int indexCount = 0;
 };

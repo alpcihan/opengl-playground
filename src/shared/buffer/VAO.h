@@ -16,6 +16,9 @@ public:
     void addVBO(const std::shared_ptr<VBO> &vbo);
     void setEBO(const std::shared_ptr<EBO> &ebo);
 
+    const std::vector<std::shared_ptr<VBO>>& getVBOs() const { return vbos; }
+	const std::shared_ptr<EBO>& getEBO() const { return ebo; }
+
 private:
     unsigned int id;
     unsigned int attribPointerCount = 0;
