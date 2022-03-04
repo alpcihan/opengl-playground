@@ -1,5 +1,4 @@
 #include "window/Window.h"
-#include "spdlog/spdlog.h"
 #include "opengl/OpenGLAPI.h"
 
 static unsigned windowCount = 0;

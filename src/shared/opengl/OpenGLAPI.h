@@ -1,7 +1,6 @@
 #pragma once
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
+#include "shared.h"
 #include "buffer/VAO.h"
 
 namespace OpenGLAPI

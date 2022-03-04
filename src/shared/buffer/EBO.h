@@ -1,5 +1,7 @@
 #pragma once
 
+#include "shared.h"
+
 class EBO
 {
 public:

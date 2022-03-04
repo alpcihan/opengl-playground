@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include "shared.h"
 #include "opengl/OpenGLContext.h"
 
 struct WindowProps

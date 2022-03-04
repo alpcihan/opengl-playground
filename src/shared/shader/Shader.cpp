@@ -1,9 +1,4 @@
 #include "shader/Shader.h"
-#include <fstream>
-#include <glad/glad.h>
-#include <glm/gtc/type_ptr.hpp>
-#include <spdlog/spdlog.h>
-#include "RootDir.h"
 
 Shader::Shader(const std::string &vertexSrcFilePath, const std::string &fragmentSrcFilePath)
 {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "shared.h"
 #include "BufferLayout.h"
 
 class VBO

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <glad/glad.h>
-#include <unordered_map>
-#include <string>
+#include "shared.h"
 
 enum ShaderType
 {

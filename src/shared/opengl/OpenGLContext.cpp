@@ -1,5 +1,4 @@
 #include "opengl/OpenGLContext.h"
-#include <spdlog/spdlog.h>
 
 OpenGLContext::OpenGLContext(GLFWwindow *window)
     : window(window){}

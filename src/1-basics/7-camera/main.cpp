@@ -1,12 +1,4 @@
-#include "window/Window.h"
-#include "shader/Shader.h"
-#include "texture/Texture.h"
-#include "buffer/VAO.h"
-#include "components/TransformComponent.h"
-#include "opengl/OpenGLAPI.h"
-
-#include <spdlog/spdlog.h>
-#include <memory>
+#include "core.h"
 
 int main()
 {

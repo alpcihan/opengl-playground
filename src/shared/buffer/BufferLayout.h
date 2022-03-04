@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <initializer_list>
+#include "shared.h"
 #include "shader/ShaderType.h"
 
 struct BufferElement
