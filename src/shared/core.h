@@ -18,3 +18,6 @@
 #include "texture/Texture.h"
 
 #include "window/Window.h"
+
+#include "camera/Camera.h"
+#include "camera/PerspectiveCamera.h"
