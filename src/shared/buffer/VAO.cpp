@@ -72,8 +72,8 @@ void VAO::setFloatAttrib(const BufferElement &bufferElement, const unsigned int 
     glEnableVertexAttribArray(this->attribPointerCount);
 
     glVertexAttribPointer(this->attribPointerCount,
-                          shaderDataTypeSizeMap.find(bufferElement.type)->second,
-                          shaderDataTypeToGLTypeMap.find(bufferElement.type)->second,
+                          shaderDataTypeSize.at(bufferElement.type),
+                          shaderDataTypeToGLShaderDataType.at(bufferElement.type),
                           bufferElement.isNormalized ? GL_TRUE : GL_FALSE,
                           stride,
                           (void *)bufferElement.offset);
@@ -86,8 +86,8 @@ void VAO::setIntAttrib(const BufferElement &bufferElement, const unsigned int st
     glEnableVertexAttribArray(this->attribPointerCount);
 
     glVertexAttribIPointer(this->attribPointerCount,
-                           shaderDataTypeSizeMap.find(bufferElement.type)->second,
-                           shaderDataTypeToGLTypeMap.find(bufferElement.type)->second,
+                           shaderDataTypeSize.at(bufferElement.type),
+                           shaderDataTypeToGLShaderDataType.at(bufferElement.type),
                            stride,
                            (void *)bufferElement.offset);
 

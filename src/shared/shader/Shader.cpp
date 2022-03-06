@@ -86,7 +86,7 @@ std::string Shader::readFile(const std::string &shaderSrcFilePath) const
 
 unsigned int Shader::createShader(const ShaderType shaderType, const char *shaderSource) const
 {
-    unsigned int shaderId = glCreateShader(shaderType);
+    unsigned int shaderId = glCreateShader(shaderTypeToGLShaderType.at(shaderType));
     glShaderSource(shaderId, 1, &shaderSource, NULL);
     glCompileShader(shaderId);
 

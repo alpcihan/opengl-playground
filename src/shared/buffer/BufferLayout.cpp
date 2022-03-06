@@ -5,7 +5,7 @@
 // Buffer Element
 //////////////////
 BufferElement::BufferElement(ShaderDataType type, bool isNormalized, const std::string &name)
-    : type(type), name(name), byte(shaderDataTypeByteMap.find(type)->second), isNormalized(isNormalized) {}
+    : type(type), name(name), byte(shaderDataTypeByte.at(type)), isNormalized(isNormalized) {}
 
 /////////////////
 // Buffer Layout

@@ -2,26 +2,19 @@
 
 #include "shared.h"
 
-enum ShaderType
+enum class ShaderType
 {
-    Fragment = GL_FRAGMENT_SHADER,
-    Vertex = GL_VERTEX_SHADER,
-    Geometry = GL_GEOMETRY_SHADER
+    Fragment, Vertex, Geometry
 };
 
 enum class ShaderDataType
 {
-    Int,
-    IVec2,
-    IVec3,
-    IVec4,
-    Float,
-    Vec2,
-    Vec3,
-    Vec4,
+    Int, IVec2, IVec3, IVec4,
+    Float, Vec2, Vec3, Vec4,
     Bool
 };
 
-extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeByteMap;
-extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSizeMap;
-extern const std::unordered_map<ShaderDataType, GLenum> shaderDataTypeToGLTypeMap;
+extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeByte;
+extern const std::unordered_map<ShaderDataType, unsigned int> shaderDataTypeSize;
+extern const std::unordered_map<ShaderDataType, GLenum> shaderDataTypeToGLShaderDataType;
+extern const std::unordered_map<ShaderType, GLenum> shaderTypeToGLShaderType;
