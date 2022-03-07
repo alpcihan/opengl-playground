@@ -1,8 +1,8 @@
-set(CHAPTERS
-    1-basics
+set(CONTENTS
+    practices
 )
 
-set(1-basics
+set(practices
     1-hello-window
     2-hello-triangle
     3-shader
@@ -12,23 +12,20 @@ set(1-basics
     7-camera
 )
 
-foreach(CHAPTER ${CHAPTERS})
-    foreach(PROJECT ${${CHAPTER}})
+foreach(CONTENT ${CONTENTS})
+    foreach(PROJECT ${${CONTENT}})
         file(GLOB_RECURSE SOURCE
-            "${CHAPTER}/${PROJECT}/*.h"
-            "${CHAPTER}/${PROJECT}/*.hpp"
-            "${CHAPTER}/${PROJECT}/*.cpp"
-            "${CHAPTER}/${PROJECT}/*.c"
-            "shared/*.c"
-            "shared/*.cpp"
+            "${CONTENT}/${PROJECT}/*.cpp"
+            "${CONTENT}/${PROJECT}/*.c"
+            "core/*.c"
+            "core/*.cpp"
         )
-        set(NAME "${CHAPTER}_${PROJECT}")
+        set(NAME "${CONTENT}_${PROJECT}")
 
         add_executable(${NAME} ${SOURCE})
         target_include_directories(${NAME} 
-            PUBLIC "${CHAPTER}/${PROJECT}"
-            PUBLIC "shared"
+            PUBLIC "./"
         )
         target_link_libraries(${NAME} externals)
     endforeach(PROJECT)
-endforeach(CHAPTER)
+endforeach(CONTENT)
