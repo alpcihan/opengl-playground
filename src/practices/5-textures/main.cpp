@@ -21,7 +21,7 @@ int main()
     vbo->setLayout({{ShaderDataType::Vec3, true},
                     {ShaderDataType::Vec2, true}});
 
-    std::shared_ptr<EBO> ebo = std::make_shared<EBO>(indices, sizeof(unsigned int) * 6);
+    std::shared_ptr<EBO> ebo = std::make_shared<EBO>(indices, 6);
 
     vao.addVBO(vbo);
     vao.setEBO(ebo);

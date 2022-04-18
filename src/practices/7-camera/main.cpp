@@ -36,7 +36,7 @@ int main()
         0.5, -0.5, 0.5, 1.0, 0.0,
         -0.5, -0.5, 0.5, 0.0, 0.0,
         -0.5, -0.5, -0.5, 0.0, 1.0};
-
+    
     unsigned int indices[] = {
         // front
         0,
@@ -88,7 +88,7 @@ int main()
     vbo->setLayout({{ShaderDataType::Vec3, true},
                     {ShaderDataType::Vec2, true}});
 
-    std::shared_ptr<EBO> ebo = std::make_shared<EBO>(indices, sizeof(unsigned int) * 36);
+    std::shared_ptr<EBO> ebo = std::make_shared<EBO>(indices, 36);
 
     vao->addVBO(vbo);
     vao->setEBO(ebo);
@@ -128,7 +128,7 @@ int main()
         glm::mat4 mvp = projection * view * model;
         shader.setMat4("u_mtrx", mvp);
 
-        OpenGLAPI::draw(vao);
+        OpenGLAPI::draw(vao.get());
 
         window.update();
     }
