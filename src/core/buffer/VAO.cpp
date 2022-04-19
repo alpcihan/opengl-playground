@@ -28,6 +28,8 @@ void VAO::addVBO(const std::shared_ptr<VBO> &vbo)
 
     const BufferLayout &layout = vbo->getLayout();
     setAttribPointers(layout);
+
+    vbos.push_back(vbo);
 }
 
 void VAO::setEBO(const std::shared_ptr<EBO> &ebo)
