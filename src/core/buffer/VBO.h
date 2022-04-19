@@ -7,14 +7,14 @@ class VBO
 {
 public:
     VBO(unsigned int size);
-    VBO(const float *vertices, unsigned int size);
-    VBO(const float *vertices, unsigned int size, const BufferLayout &layout);
+    VBO(const void *vertices, unsigned int size);
+    VBO(const void *vertices, unsigned int size, const BufferLayout &layout);
     ~VBO();
 
     void setLayout(const BufferLayout &layout);
     const BufferLayout &getLayout() const;
 
-    void setData(const float *vertices, unsigned int size);
+    void setData(const void *vertices, unsigned int size);
 
     void bind() const;
     void unbind() const;
