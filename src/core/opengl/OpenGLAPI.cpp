@@ -7,9 +7,10 @@ namespace OpenGLAPI
         glEnable(GL_DEPTH_TEST);
     }
 
-    void draw(const std::shared_ptr<VAO>& vao)
+    void draw(const VAO *vao)
     {
         unsigned int indexCount = vao->getEBO()->getIndexCount();
+
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
     }
 
