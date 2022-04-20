@@ -21,3 +21,6 @@
 
 #include "core/camera/Camera.h"
 #include "core/camera/PerspectiveCamera.h"
+
+#include "core/model/Vertex.h"
+#include "core/model/Mesh.h"
