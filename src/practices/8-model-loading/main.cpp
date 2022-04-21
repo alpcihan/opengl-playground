@@ -84,11 +84,11 @@ int main()
 
     Mesh mesh(vertices, indices);
 
-    Shader shader("resources/shaders/hello-transformations.vert", "resources/shaders/hello-texture.frag");
+    Shader shader("hello-transformations.vert", "hello-texture.frag");
     shader.bind();
 
-    Texture texture0("resources/textures/wall.jpg");
-    Texture texture1("resources/textures/pepe.png");
+    Texture texture0("wall.jpg");
+    Texture texture1("pepe.png");
 
     texture0.bind(0);
     shader.setInt("u_texture0", 0);

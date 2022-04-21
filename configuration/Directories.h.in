@@ -1,0 +1,7 @@
+#ifndef DIRECTORIES
+
+#define ROOT_DIR "${CMAKE_SOURCE_DIR}/"
+#define SHADER_DIR "${CMAKE_SOURCE_DIR}/resources/shaders/"
+#define TEXTURE_DIR "${CMAKE_SOURCE_DIR}/resources/textures/"
+
+#endif

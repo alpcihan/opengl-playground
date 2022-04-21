@@ -17,4 +17,4 @@
 #include <initializer_list>
 #include <unordered_map>
 
-#include "configuration/RootDir.h"
+#include "configuration/Directories.h"

@@ -65,17 +65,18 @@ void Shader::init(const std::string &vertexSrcFilePath, const std::string &fragm
 }
 
 std::string Shader::readFile(const std::string &shaderSrcFilePath) const
-{
-    std::ifstream shaderFile(ROOT_DIR + shaderSrcFilePath);
-    std::string shaderSourceCode = "";
-    std::string line;
+{   
+    std::string path = SHADER_DIR + shaderSrcFilePath;
+    std::ifstream shaderFile(path);
 
     if (shaderFile.fail())
     {
         spdlog::error("Failed to open shader file path: {0}", shaderSrcFilePath);
-        return shaderSourceCode;
+        return "";
     }
 
+    std::string shaderSourceCode = "";
+    std::string line;
     while (getline(shaderFile, line))
     {
         shaderSourceCode += line + '\n';

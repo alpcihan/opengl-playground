@@ -37,7 +37,7 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
 
-    Shader shader("resources/shaders/hello-shader.vert", "resources/shaders/hello-shader.frag");
+    Shader shader("hello-shader.vert", "hello-shader.frag");
     shader.bind();
 
     while (!window.isClosed())

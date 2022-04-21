@@ -1,15 +1,15 @@
 #include "core/texture/Texture.h"
 
-Texture::Texture(const std::string &path)
+Texture::Texture(const std::string &texturePath)
     : id(0)
 {
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
-    unsigned char *textureData = stbi_load((ROOT_DIR + path).c_str(), &width, &height, &channels, 0);
+    unsigned char *textureData = stbi_load((TEXTURE_DIR + texturePath).c_str(), &width, &height, &channels, 0);
 
     if (!textureData)
     {
-        spdlog::error("Failed to stbi_load a texture (path: {0})", path);
+        spdlog::error("Failed to stbi_load a texture (path: {0})", texturePath);
         return;
     }
 
@@ -26,7 +26,7 @@ Texture::Texture(const std::string &path)
     }
     else
     {
-        spdlog::error("Invalid texture file format (path: {0})", path);
+        spdlog::error("Invalid texture file format (path: {0})", texturePath);
         return;
     }
 
