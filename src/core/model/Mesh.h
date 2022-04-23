@@ -14,10 +14,11 @@ public:
     // mesh data
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
+    std::vector<Texture> textures;
 
 public:
-    Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices);
-    void draw();
+    Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices, const std::vector<Texture> &textures);
+    void draw(Shader& shader);
 
 private:
     std::unique_ptr<VAO> vao;

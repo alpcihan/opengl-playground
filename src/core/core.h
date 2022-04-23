@@ -24,3 +24,4 @@
 
 #include "core/model/Vertex.h"
 #include "core/model/Mesh.h"
+#include "core/model/Model.h"
