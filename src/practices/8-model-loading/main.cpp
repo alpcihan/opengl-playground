@@ -1,125 +1,81 @@
 #include "core/core.h"
 
+float x = 0, y = 0, z = 0;
+const float num = 1;
+
+void keyCalls(const GLFWwindow *window)
+{
+    GLFWwindow *win = (GLFWwindow *)window;
+
+    if (glfwGetKey(win, GLFW_KEY_X) == GLFW_PRESS)
+    {
+        z += num;
+    }
+
+    else if (glfwGetKey(win, GLFW_KEY_Z) == GLFW_PRESS)
+    {
+        z -= num;
+    }
+
+    if (glfwGetKey(win, GLFW_KEY_D) == GLFW_PRESS)
+    {
+        x += num;
+    }
+
+    else if (glfwGetKey(win, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        x -= num;
+    }
+
+    if (glfwGetKey(win, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        y += num;
+    }
+
+    else if (glfwGetKey(win, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        y -= num;
+    }
+}
+
 int main()
 {
     std::unique_ptr<Window> window = std::make_unique<Window>(WindowProps(1600, 1600));
     OpenGLAPI::init();
 
-    const std::vector<Vertex> vertices = {
-        // front
-        Vertex( 0.5, 0.5, 0.5, 1.0, 1.0),
-        Vertex( 0.5, -0.5, 0.5, 1.0, 0.0),
-        Vertex( -0.5, -0.5, 0.5, 0.0, 0.0),
-        Vertex( -0.5, 0.5, 0.5, 0.0, 1.0),
-        // back
-        Vertex( 0.5, 0.5, -0.5, 1.0, 1.0),
-        Vertex( 0.5, -0.5, -0.5, 1.0, 0.0),
-        Vertex( -0.5, -0.5, -0.5, 0.0, 0.0),
-        Vertex( -0.5, 0.5, -0.5, 0.0, 1.0),
-        // right
-        Vertex( 0.5, 0.5, -0.5, 1.0, 1.0),
-        Vertex( 0.5, -0.5, -0.5, 1.0, 0.0),
-        Vertex( 0.5, -0.5, 0.5, 0.0, 0.0),
-        Vertex( 0.5, 0.5, 0.5, 0.0, 1.0),
-        // left
-        Vertex( -0.5, 0.5, 0.5, 1.0, 1.0),
-        Vertex( -0.5, -0.5, 0.5, 1.0, 0.0),
-        Vertex( -0.5, -0.5, -0.5, 0.0, 0.0),
-        Vertex( -0.5, 0.5, -0.5, 0.0, 1.0),
-        // top
-        Vertex( 0.5, 0.5, -0.5, 1.0, 1.0),
-        Vertex( 0.5, 0.5, 0.5, 1.0, 0.0),
-        Vertex( -0.5, 0.5, 0.5, 0.0, 0.0),
-        Vertex( -0.5, 0.5, -0.5, 0.0, 1.0),
-        // bottom
-        Vertex( 0.5, -0.5, -0.5, 1.0, 1.0),
-        Vertex( 0.5, -0.5, 0.5, 1.0, 0.0),
-        Vertex( -0.5, -0.5, 0.5, 0.0, 0.0),
-        Vertex( -0.5, -0.5, -0.5, 0.0, 1.0)};
+    Model backpack("fox-lowp/fox-lowp.obj");
 
-    const std::vector<unsigned int> indices = {
-        // front
-        0,
-        1,
-        2,
-        2,
-        3,
-        0,
-        // back
-        4,
-        5,
-        6,
-        6,
-        7,
-        4,
-        // right
-        8,
-        9,
-        10,
-        10,
-        11,
-        8,
-        // left
-        12,
-        13,
-        14,
-        14,
-        15,
-        12,
-        // top
-        16,
-        17,
-        18,
-        18,
-        19,
-        16,
-        // bottom
-        20,
-        21,
-        22,
-        22,
-        23,
-        20,
-    };
-
-    Mesh mesh(vertices, indices);
-
-    Shader shader("hello-transformations.vert", "hello-texture.frag");
+    Shader shader("model-loading.vert", "model-loading.frag");
     shader.bind();
 
-    Texture texture0("wall.jpg");
-    Texture texture1("pepe.png");
-
-    texture0.bind(0);
-    shader.setInt("u_texture0", 0);
-
-    texture1.bind(1);
-    shader.setInt("u_texture1", 1);
-
     TransformComponent transform(
-        glm::vec3(-0.2f, -0.2f, 0.0f),
         glm::vec3(0.0f),
-        glm::vec3(0.5, 0.5, 0.5));
-
-    glm::vec3 cameraPos = glm::vec3(0, 0, 4);
-    glm::vec3 cameraUp = glm::vec3(0, 1, 0);
-    glm::vec3 cameraFront = glm::vec3(0, 0, -1);
-
-    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-    glm::mat4 projection = glm::perspective(glm::radians(45.f), 1.f, 0.1f, 1000.f);
+        glm::vec3(0.0f),
+        glm::vec3(0.1f));
 
     while (!window->isClosed())
     {
         OpenGLAPI::clear();
 
+        /* key calls */
+        keyCalls(window->getGLFWwindow());
+
+        /* update the camera */
+        glm::vec3 cameraPos = glm::vec3(x, y, 4 + z);
+        glm::vec3 cameraUp = glm::vec3(0, 1, 0);
+        glm::vec3 cameraFront = glm::vec3(0, 0, -1);
+
+        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        glm::mat4 projection = glm::perspective(glm::radians(45.f), 1.f, 0.1f, 1000.f);
+
         /* Render comes here. */
-        transform.rotation = glm::vec3(glm::radians((float)glfwGetTime() * 10));
+        //transform.rotation = glm::vec3(glm::radians((float)glfwGetTime() * 10));
         glm::mat4 model = transform.getTransform();
 
         glm::mat4 mvp = projection * view * model;
         shader.setMat4("u_mtrx", mvp);
 
-        mesh.draw();
+        backpack.draw(shader);
 
         window->update();
     }
