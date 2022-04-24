@@ -14,10 +14,10 @@ public:
     // mesh data
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-    std::vector<Texture> textures;
+    std::vector<std::shared_ptr<Texture>> textures;
 
 public:
-    Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices, const std::vector<Texture> &textures);
+    Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices, const std::vector<std::shared_ptr<Texture>> &textures);
     void draw(Shader& shader);
 
 private:

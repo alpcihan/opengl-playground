@@ -1,7 +1,7 @@
 #include "core/model/Mesh.h"
 #include "core/opengl/OpenGLAPI.h"
 
-Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices, const std::vector<Texture> &textures)
+Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices, const std::vector<std::shared_ptr<Texture>> &textures)
     : vertices(vertices), indices(indices), textures(textures)
 {
     setupMesh();
@@ -11,10 +11,10 @@ void Mesh::draw(Shader& shader)
 {
     for(unsigned int i = 0; i < textures.size(); i++)
     {
-        textures[i].bind(i);
-        shader.setFloat(("texture_diffuse" + std::to_string(i)).c_str(), i);
+        shader.setInt(("texture_diffuse" + std::to_string(i)).c_str(), i);
+        textures[i]->bind(i);
     }
-
+    
     OpenGLAPI::draw(vao.get());
 }
 

@@ -9,7 +9,7 @@ void Model::draw(Shader &shader)
 {
     for(auto& mesh: meshes)
     {
-        mesh.draw(shader);
+        mesh->draw(shader);
     }
 }
 
@@ -17,7 +17,7 @@ void Model::loadModel(std::string path)
 {
     Assimp::Importer importer;
     path = MODEL_DIR + path;
-    const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
@@ -44,13 +44,13 @@ void Model::processNode(aiNode *node, const aiScene *scene)
     }
 }
 
-Mesh Model::processMesh(const aiMesh *mesh, const aiScene *scene)
+std::shared_ptr<Mesh> Model::processMesh(const aiMesh *mesh, const aiScene *scene)
 {
     const std::vector<Vertex> vertices = processVertices(mesh);
     const std::vector<unsigned int> indices = processIndices(mesh);
-    const std::vector<Texture> textures = processMaterials(mesh, scene);
+    const std::vector<std::shared_ptr<Texture>> textures = processMaterials(mesh, scene);
 
-    return Mesh(vertices, indices, textures);
+    return std::make_shared<Mesh>(vertices, indices, textures);
 }
 
 std::vector<Vertex> Model::processVertices(const aiMesh *mesh)
@@ -60,12 +60,16 @@ std::vector<Vertex> Model::processVertices(const aiMesh *mesh)
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         glm::vec3 position(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
+        spdlog::info("{0} {1}", mesh->mNormals[i].x, mesh->mNormals[i].y);
         glm::vec3 normal(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
         glm::vec2 texCoords(mesh->mTextureCoords[0]
                                 ? glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y)
                                 : glm::vec2(0.0f, 0.0f));
 
-        Vertex vertex(position, normal, texCoords);
+        Vertex vertex;
+        vertex.position = position;
+        vertex.normal = normal;
+        vertex.texCoords = texCoords;
         vertices.push_back(vertex);
     }
 
@@ -86,9 +90,9 @@ std::vector<unsigned int> Model::processIndices(const aiMesh *mesh)
     return indices;
 }
 
-std::vector<Texture> Model::processMaterials(const aiMesh *mesh, const aiScene *scene)
+std::vector<std::shared_ptr<Texture>> Model::processMaterials(const aiMesh *mesh, const aiScene *scene)
 {
-    std::vector<Texture> diffuseMaps;
+    std::vector<std::shared_ptr<Texture>> diffuseMaps;
 
     if (mesh->mMaterialIndex >= 0)
     {
@@ -99,15 +103,14 @@ std::vector<Texture> Model::processMaterials(const aiMesh *mesh, const aiScene *
     return diffuseMaps;
 }
 
-std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type)
+std::vector<std::shared_ptr<Texture>> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type)
 {
-    std::vector<Texture> textures;
+    std::vector<std::shared_ptr<Texture>> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
     {
         aiString path;
         mat->GetTexture(type, i, &path);
-
-        Texture texture(path.C_Str());
+        std::shared_ptr<Texture> texture = std::make_shared<Texture>(path.C_Str());
         textures.push_back(texture);
     }
     return textures;
