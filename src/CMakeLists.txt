@@ -11,6 +11,7 @@ set(practices
     6-transformations
     7-camera
     8-model-loading
+    9-lighting
 )
 
 foreach(CONTENT ${CONTENTS})
