@@ -60,7 +60,6 @@ std::vector<Vertex> Model::processVertices(const aiMesh *mesh)
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         glm::vec3 position(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-        spdlog::info("{0} {1}", mesh->mNormals[i].x, mesh->mNormals[i].y);
         glm::vec3 normal(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
         glm::vec2 texCoords(mesh->mTextureCoords[0]
                                 ? glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y)
